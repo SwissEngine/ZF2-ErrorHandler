@@ -1,0 +1,23 @@
+{
+    "name": "swissengine/zf2-errorhandler",
+    "description": "ErrorHandler for ZF2 apps",
+    "license": "MIT",
+    "keywords": [
+        "swissengine",
+        "zf2"
+    ],
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "autoload": {
+        "psr-0": {
+            "SwissEngine\\ErrorHandler": "src"
+        },
+        "classmap" : ["Module.php"]
+    },
+    "authors": [
+        {
+            "name": "SwissEngine"
+        }
+    ]
+}
