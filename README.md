@@ -1,7 +1,7 @@
 SwissEngine\ErrorHandler
 ===============
 
-This library aims at providing a simple way to handle errors in all of your ZF2 application. When an error is triggered, whether it is in your controller, your libraries or anywhere in your views, an exception is thrown hence preserving your application from unmonitored errors. It is then possible to log them through the MvcEvent::EVENT_RENDER_ERROR event.
+This library aims at providing a simple way to handle errors in all of your ZF2 application. When an error is triggered, whether it is in your controller, your libraries or anywhere in your views, an exception is thrown hence preserving your application from unmonitored errors.
 
 Installation
 ------------
