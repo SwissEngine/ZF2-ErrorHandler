@@ -8,11 +8,6 @@ class Module
 {
     public function onBootstrap(MvcEvent $e)
     {
-        // Postpone CLI support
-        if (php_sapi_name() === 'cli') {
-            return;
-        }
-
         $callback = function () use ($e)
         {
             $error    = error_get_last() ?: func_get_args();
