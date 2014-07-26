@@ -1,5 +1,5 @@
 <?php
-namespace SwissEngine\ErrorHandler;
+namespace SwissEngine\Tools\ErrorHandler;
 
 use ErrorException;
 use Zend\Mvc\MvcEvent;
