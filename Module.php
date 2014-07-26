@@ -15,7 +15,7 @@ class Module
 
             if (!empty($error)) {
                 // Create exception
-                $exception = new ErrorException($error[1], 0, $error[0], $error[2], $error[3], isset($error[4]) ? $error[4] : null);
+                $exception = new ErrorException($error[1], 0, $error[0], $error[2], $error[3], isset($error[4]) && $error[4] instanceof \Exception ? $error[4] : null);
 
                 // Non-fatal error
                 if (!in_array($error[0], [
