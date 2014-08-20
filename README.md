@@ -15,5 +15,5 @@ php composer.phar require swissengine/zf2-errorhandler:dev-master
 Setup
 -----
 
-If you use Zend Framework 2, you can now enable this module in your application by adding it to `config/application.config.php` as `SwissEngine\ErrorHandler`.
+If you use Zend Framework 2, you can now enable this module in your application by adding it to `config/application.config.php` as `SwissEngine\Tools\ErrorHandler`.
 
