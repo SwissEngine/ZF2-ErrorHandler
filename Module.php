@@ -12,7 +12,7 @@ class Module
             $error = error_get_last() ?: func_get_args();
             $error = array_values($error);
 
-            if (empty($error)) {
+            if (empty($error) || php_sapi_name() === 'cli') {
                 return;
             }
 
