@@ -5,8 +5,16 @@ use ErrorException;
 use Zend\Mvc\Application;
 use Zend\Mvc\MvcEvent;
 
+/**
+ * Class Module
+ *
+ * @package SwissEngine\Tools\ErrorHandler
+ */
 class Module
 {
+    /**
+     * @param MvcEvent $e
+     */
     public function onBootstrap(MvcEvent $e)
     {
         ini_set('display_errors', 'false');
