@@ -2,7 +2,10 @@
 namespace SwissEngine\Tools\ErrorHandler;
 
 use ErrorException;
+use Zend\Mvc\Application;
 use Zend\Mvc\MvcEvent;
+use Zend\Mvc\View\Http\DefaultRenderingStrategy;
+use Zend\Mvc\View\Http\ViewManager;
 
 class Module
 {
@@ -37,38 +40,15 @@ class Module
                 ob_end_clean();
             }
 
-            // Initialize render tools
-            $sm = $e->getApplication()->getServiceManager();
-            $manager = $sm->get('viewManager');
-            $config = $sm->get('Config');
-            $renderer = $manager->getRenderer();
-            $layout = $manager->getLayoutTemplate();
-            $viewType = get_class($manager->getViewModel());
+            $events = $e->getApplication()->getEventManager();
 
-            // Config based output
-            $display = isset($config['view_manager']['display_exceptions']) ? $config['view_manager']['display_exceptions'] : null;
-            $template = isset($config['view_manager']['exception_template']) ? $config['view_manager']['exception_template'] : null;
+            $e->setError(Application::ERROR_EXCEPTION);
+            $e->setParam('exception', $exception);
+            $e->setName(MvcEvent::EVENT_RENDER_ERROR);
 
-            $model = new $viewType();
-            $model->setTemplate($layout);
+            $events->triggerEvent($e);
 
-            // Error page
-            if (null !== $template) {
-                $content = new $viewType(
-                    array(
-                        'exception' => $exception,
-                        'display_exceptions' => $display
-                    )
-                );
-                $content->setTemplate($template);
-                $result = $renderer->render($content);
-                $model->setVariables([
-                    'content' => $result,
-                    'exception' => $exception,
-                ]);
-            }
-
-            echo $renderer->render($model);
+            $e->getApplication()->run();
         };
 
         set_error_handler($callback, E_ALL);
