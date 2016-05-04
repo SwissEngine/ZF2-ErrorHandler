@@ -2,6 +2,7 @@
 namespace SwissEngine\Tools\ErrorHandler;
 
 use ErrorException;
+use Zend\EventManager\EventManager;
 use Zend\Mvc\Application;
 use Zend\Mvc\MvcEvent;
 
@@ -17,14 +18,14 @@ class Module
      */
     public function onBootstrap(MvcEvent $e)
     {
-        ini_set('display_errors', 'false');
+        ini_set('display_errors', 'off');
 
         $errorCallback = function () use ($e) {
             // Fetching the error's information
             $error = error_get_last() ?: func_get_args();
             $error = array_values($error);
-            
-            if (empty($error)) {
+
+            if (!$error) {
                 return;
             }
 
@@ -37,7 +38,6 @@ class Module
             /** @var Application $application */
             $application = $e->getApplication();
             $application->getEventManager()->triggerEvent($e);
-            $application->run();
         };
 
         // Set error handlers
