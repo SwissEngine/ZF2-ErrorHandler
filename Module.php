@@ -23,6 +23,10 @@ class Module
             // Fetching the error's information
             $error = error_get_last() ?: func_get_args();
             $error = array_values($error);
+            
+            if (empty($error)) {
+                return;
+            }
 
             // Create exception ans associated event
             $exception = new ErrorException($error[1], 0, $error[0], $error[2], $error[3], isset($error[4]) && $error[4] instanceof \Exception ? $error[4] : null);
